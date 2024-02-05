@@ -472,6 +472,89 @@
 				"[concat(variables('factoryId'), '/datasets/InputFilesCopyDS')]",
 				"[concat(variables('factoryId'), '/datasets/OutputFiles_ADLS')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_aa_executeproy')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Exec_IngestBronce",
+						"type": "ExecutePipeline",
+						"dependsOn": [],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_copyfiles_capabronce",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Exec_Transform",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Exec_IngestBronce",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_capaplata",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					},
+					{
+						"name": "Exec_CapaOro",
+						"type": "ExecutePipeline",
+						"dependsOn": [
+							{
+								"activity": "Exec_Transform",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"pipeline": {
+								"referenceName": "pl_capaoro",
+								"type": "PipelineReference"
+							},
+							"waitOnCompletion": true,
+							"parameters": {}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_copyfiles_capabronce')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_capaplata')]",
+				"[concat(variables('factoryId'), '/pipelines/pl_capaoro')]"
+			]
 		}
 	]
 }
