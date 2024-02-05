@@ -1,9 +1,9 @@
 {
-	"name": "pl_capaplata",
+	"name": "pl_capaoro",
 	"properties": {
 		"activities": [
 			{
-				"name": "Bronce_a_Plata",
+				"name": "Plata_a_Oro",
 				"type": "DatabricksNotebook",
 				"dependsOn": [],
 				"policy": {
@@ -15,16 +15,14 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"notebookPath": "/Users/hectormartinsandovalreyes@gmail.com/transferencia_de_datos_a_la_capa_plata"
+					"notebookPath": "/Users/hectormartinsandovalreyes@gmail.com/transferir_datos_a_capaoro"
 				},
 				"linkedServiceName": {
-					"referenceName": "AzureDatabricks_DataFactory",
+					"referenceName": "AzureDatabricks1",
 					"type": "LinkedServiceReference"
 				}
 			}
 		],
-		"annotations": [],
-		"lastPublishTime": "2024-02-03T03:33:36Z"
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+		"annotations": []
+	}
 }
