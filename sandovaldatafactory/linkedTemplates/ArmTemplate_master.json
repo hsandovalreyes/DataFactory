@@ -1,0 +1,112 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Nombre de instancia de Data Factory",
+			"defaultValue": "sandovaldatafactory"
+		},
+		"AzureDatabricks1_accessToken": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accessToken\"de \"AzureDatabricks1\""
+		},
+		"AzureDatabricks_DataFactory_accessToken": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accessToken\"de \"AzureDatabricks_DataFactory\""
+		},
+		"InputFilesCopy_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"InputFilesCopy_ADLS\""
+		},
+		"OutputFilesADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"OutputFilesADLS\""
+		},
+		"inputFiles_ADLS_accountKey": {
+			"type": "secureString",
+			"metadata": "Cadena protegida para \"accountKey\"de \"inputFiles_ADLS\""
+		},
+		"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0203-010248-4z8v7049"
+		},
+		"AzureDatabricks_DataFactory_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0203-010248-4z8v7049"
+		},
+		"InputFilesCopy_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sandovalstorage.dfs.core.windows.net/"
+		},
+		"OutputFilesADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sandovalstorage.dfs.core.windows.net/"
+		},
+		"inputFiles_ADLS_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://sandovalstorage.dfs.core.windows.net/"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI de la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas."
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Token de SAS para la cuenta de almacenamiento que contiene las plantillas de ARM vinculadas"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "sandovaldatafactory_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDatabricks1_accessToken": {
+						"value": "[parameters('AzureDatabricks1_accessToken')]"
+					},
+					"AzureDatabricks_DataFactory_accessToken": {
+						"value": "[parameters('AzureDatabricks_DataFactory_accessToken')]"
+					},
+					"InputFilesCopy_ADLS_accountKey": {
+						"value": "[parameters('InputFilesCopy_ADLS_accountKey')]"
+					},
+					"OutputFilesADLS_accountKey": {
+						"value": "[parameters('OutputFilesADLS_accountKey')]"
+					},
+					"inputFiles_ADLS_accountKey": {
+						"value": "[parameters('inputFiles_ADLS_accountKey')]"
+					},
+					"AzureDatabricks1_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks1_properties_typeProperties_existingClusterId')]"
+					},
+					"AzureDatabricks_DataFactory_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricks_DataFactory_properties_typeProperties_existingClusterId')]"
+					},
+					"InputFilesCopy_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('InputFilesCopy_ADLS_properties_typeProperties_url')]"
+					},
+					"OutputFilesADLS_properties_typeProperties_url": {
+						"value": "[parameters('OutputFilesADLS_properties_typeProperties_url')]"
+					},
+					"inputFiles_ADLS_properties_typeProperties_url": {
+						"value": "[parameters('inputFiles_ADLS_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
