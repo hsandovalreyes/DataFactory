@@ -1,0 +1,9 @@
+{
+	"name": "sandovaldatafactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c742c3fd-b9fc-44de-b5f3-8ed30119699f",
+		"tenantId": "ee37f84e-4db2-432a-9d4d-ece956b8d756"
+	}
+}
